@@ -430,5 +430,10 @@ p.addEventListener('click',function(ev){if(ev.target===p)cerrar()});
 document.addEventListener('keydown',function(ev){if(ev.key==='Escape')cerrar()});
 p.querySelector('a').addEventListener('click',cerrar);})();
 </script>
+<!-- contador de visitas -->
+<script>(function(){try{var L=localStorage,S=sessionStorage;if(location.search.indexOf('yo=1')>-1)L.setItem('soy-de-la-casa','1');
+if(L.getItem('soy-de-la-casa')||S.getItem('visita-contada'))return;S.setItem('visita-contada','1');
+var s=location.pathname.split('/').filter(Boolean)[0]||'',c=JSON.stringify({s:s});if(!s)return;
+if(navigator.sendBeacon)navigator.sendBeacon('https://n8n-production-003b9.up.railway.app/webhook/visita',c);else fetch('https://n8n-production-003b9.up.railway.app/webhook/visita',{method:'POST',body:c,keepalive:true});}catch(e){}})();</script>
 </body>
 </html>
